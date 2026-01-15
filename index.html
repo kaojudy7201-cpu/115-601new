@@ -3,170 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>115 學測公民武功秘笈：複習網頁</title>
+    <title>115 公民武功秘笈 - 學測前總整理</title>
     <style>
         :root {
             --primary: #2c3e50;
-            --secondary: #34495e;
-            --accent: #e67e22;
-            --law: #2980b9;
-            --econ: #27ae60;
-            --bg: #f8f9fa;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #f4f7f6;
+            --white: #ffffff;
         }
-        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 900px; margin: auto; }
-        header { text-align: center; padding: 40px 0; background: var(--primary); color: white; border-radius: 15px; margin-bottom: 30px; }
+        body {
+            font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        nav button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        nav button:hover {
+            background: #2980b9;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        section {
+            background: var(--white);
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1, h2, h3 { color: var(--primary); border-left: 5px solid var(--secondary); padding-left: 10px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            overflow-x: auto;
+            display: block;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th { background-color: #f2f2f2; font-weight: bold; }
         
-        .section-title { border-left: 6px solid var(--accent); padding-left: 15px; margin: 40px 0 20px; color: var(--primary); font-size: 1.5rem; }
-        
-        /* 互動式卡片設計 */
-        .card { background: white; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px; overflow: hidden; transition: 0.3s; }
-        .card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .card-header { padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; background: #fff; }
-        .card-content { display: none; padding: 20px; border-top: 1px solid #eee; background: #fdfdfd; }
-        
-        /* 表格樣式優化 */
-        table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.95rem; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-        th { background: #f2f2f2; color: var(--primary); }
-        
-        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; color: white; }
-        .bg-law { background: var(--law); }
-        .bg-econ { background: var(--econ); }
-        .highlight { color: #c0392b; font-weight: bold; }
-        
-        .plus { font-size: 1.2rem; transition: transform 0.3s; }
-        .active .plus { transform: rotate(45deg); color: var(--accent); }
+        /* 互動式重點隱藏功能 */
+        .key-point {
+            background-color: #ffeaa7;
+            padding: 2px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #d63031;
+            font-weight: bold;
+        }
+        .key-point.hidden {
+            background-color: #2d3436;
+            color: #2d3436;
+        }
+        .key-point.hidden::after {
+            content: "（點擊看重點）";
+            color: #fff;
+            font-size: 0.8em;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 5px solid #ffecb5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .footer { text-align: center; padding: 20px; color: #7f8c8d; }
     </style>
 </head>
 <body>
 
+<header>
+    <h1>115年學測【公民與社會】武功秘笈</h1>
+    <p>整理自：115_公民武功秘笈(學測前總整理) </p>
+</header>
+
+<nav>
+    <button onclick="scrollToId('social')">社政篇</button>
+    <button onclick="scrollToId('law')">法律篇</button>
+    <button onclick="scrollToId('econ')">經濟篇</button>
+    <button onclick="toggleAll()">切換所有重點</button>
+</nav>
+
 <div class="container">
-    <header>
-        <h1>115 公民與社會：學測武功秘笈</h1>
-        <p>點擊各主題展開複習內容，強化你的記憶點！</p>
-    </header>
+    <section id="social">
+        <h2>【社政篇】核心概念</h2>
+        
+        <h3>◎ 人權理論發展</h3>
+        <table>
+            <tr>
+                <th>理論</th>
+                <th>洛克 (Locke)</th>
+                <th>盧梭 (Rousseau)</th>
+            </tr>
+            <tr>
+                <td>派別</td>
+                <td><span class="key-point">自由主義</span>始祖</td>
+                <td><span class="key-point">民主主義</span>始祖</td>
+            </tr>
+            <tr>
+                <td>主張</td>
+                <td>自然權利論、政府委託說</td>
+                <td><span class="key-point">主權在民</span>、社會契約論</td>
+            </tr>
+        </table>
 
-    <div class="section-title">【社政篇】人權與民主制度 </div>
+        <h3>◎ 三代人權演進 </h3>
+        <table>
+            <tr>
+                <th>階段</th>
+                <th>特色</th>
+                <th>性質</th>
+                <th>代表項目</th>
+            </tr>
+            <tr>
+                <td>第一代</td>
+                <td>消極人權</td>
+                <td>公民與政治權</td>
+                <td>生命、自由、財產、選舉權</td>
+            </tr>
+            <tr>
+                <td>第二代</td>
+                <td>積極人權</td>
+                <td>經濟、社會及文化權</td>
+                <td><span class="key-point">受教權</span>、勞動權、社會福利</td>
+            </tr>
+            <tr>
+                <td>第三代</td>
+                <td>集體人權</td>
+                <td>環境與發展權</td>
+                <td><span class="key-point">民族自決</span>、和平權、環境權</td>
+            </tr>
+        </table>
 
-    <div class="card" id="c1">
-        <div class="card-header" onclick="toggle('c1')">
-            <span>◎ 三代人權的進展 (重點複習)</span>
-            <span class="plus">+</span>
-        </div>
-        <div class="card-content">
-            <table>
-                <tr><th>階段</th><th>特色</th><th>主體</th><th>性質與主張</th></tr>
-                <tr><td>第一代</td><td>消極人權</td><td>個人</td><td>公民自由、政治權；要求國家降低干預 </td></tr>
-                <tr><td>第二代</td><td>積極人權</td><td>群體</td><td>經濟、社會、文化權；要求國家積極干預 (社會福利) </td></tr>
-                <tr><td>第三代</td><td>集體人權</td><td>全人類</td><td>環境、發展、民族自決權；反對歧視與隔離 </td></tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="card" id="c2">
-        <div class="card-header" onclick="toggle('c2')">
-            <span>◎ 西方民主理論比較 (審議 vs 菁英)</span>
-            <span class="plus">+</span>
-        </div>
-        <div class="card-content">
+        <h3>◎ 國家與政府體制</h3>
+        <p><b>國家組成要素：</b>人民、領土、政府、<span class="key-point">主權</span> 。</p>
+        <div class="note">
+            💡 <b>統治正當性類型（韋伯）：</b>
             <ul>
-                <li><strong>菁英民主理論 (熊彼得)：</strong> 民主是一種「選舉政治領導人」的方式，強調投票 。</li>
-                <li><strong>參與民主理論 (道爾)：</strong> 權力應高度分散，鼓勵不同勢力參與決策 。</li>
-                <li><strong>審議民主理論 (哈伯瑪斯)：</strong> <span class="highlight">討論中心</span>，強調公民在公平條件下理性溝通形成共識 。</li>
+                <li>傳統型（如：君王）</li>
+                <li>領袖魅力型（如：甘地）</li>
+                <li><span class="key-point">合法與理性型</span>（如：民主國家總統）</li>
             </ul>
         </div>
-    </div>
+    </section>
 
-    <div class="card" id="c3">
-        <div class="card-header" onclick="toggle('c3')">
-            <span>◎ 民主國家政府體制 (內閣、總統、雙首長)</span>
-            <span class="plus">+</span>
-        </div>
-        <div class="card-content">
-            <p><strong>左右共治 (法國)：</strong> 當國會多數黨與總統政黨不同時，總統依慣例任命反對陣營人士為總理，分享行政權 。</p>
-            <table>
-                <tr><th>體制</th><th>行政首長向誰負責</th><th>有無倒閣/解散權</th></tr>
-                <tr><td>內閣制</td><td>內閣向國會負責 </td><td>皆有 </td></tr>
-                <tr><td>總統制</td><td>總統向全民負責 </td><td>皆無 </td></tr>
-                <tr><td>雙首長制</td><td>總理向國會負責 </td><td>皆有 </td></tr>
-            </table>
-        </div>
-    </div>
+    <section id="law">
+        <h2>【法律篇】重要法規</h2>
+        
+        <h3>◎ 法律位階與效力 </h3>
+        <ul>
+            <li><b>最高位：</b><span class="key-point">憲法</span>（修改最難，立院提案+公民複決）。</li>
+            <li><b>法律：</b>立法院三讀通過。</li>
+            <li><b>命令：</b>行政機關依授權訂定。</li>
+        </ul>
 
-    <div class="section-title">【法律篇】基本權、刑事與民法 </div>
+        <h3>◎ 刑法：犯罪成立三步驟</h3>
+        <ol>
+            <li><span class="key-point">構成要件合致性</span>：客觀與主觀（故意過失）。</li>
+            <li><span class="key-point">違法性</span>：有無阻卻違法事由（正當防衛、緊急避難等）。</li>
+            <li><span class="key-point">有責性</span>：刑事責任能力（14歲以下、精神障礙等）。</li>
+        </ol>
 
-    <div class="card" id="l1">
-        <div class="card-header" onclick="toggle('l1')">
-            <span>◎ 刑事責任能力 (年齡分界點)</span>
-            <span class="plus">+</span>
-        </div>
-        <div class="card-content">
-            <ul>
-                <li><strong>無責任能力：</strong> <span class="highlight">未滿 14 歲</span> (不罰) 。</li>
-                <li><strong>限制責任能力：</strong> 14~18 歲、80 歲以上 (得減輕其刑) 。</li>
-                <li><strong>完全責任能力：</strong> 18~80 歲 (負完全刑責) 。</li>
-            </ul>
-        </div>
-    </div>
+        <h3>◎ 民法：行為能力界限 </h3>
+        <table>
+            <tr>
+                <th>年齡</th>
+                <th>能力類型</th>
+                <th>效力</th>
+            </tr>
+            <tr>
+                <td>未滿 7 歲</td>
+                <td>無行為能力</td>
+                <td>意思表示無效，需代理人</td>
+            </tr>
+            <tr>
+                <td>7 ~ 18 歲</td>
+                <td><span class="key-point">限制行為能力</span></td>
+                <td>原則上需經法定代理人同意</td>
+            </tr>
+            <tr>
+                <td>18 歲以上</td>
+                <td>完全行為能力</td>
+                <td>可獨立簽署有效契約</td>
+            </tr>
+        </table>
+    </section>
 
-    <div class="card" id="l2">
-        <div class="card-header" onclick="toggle('l2')">
-            <span>◎ 比例原則 (三子原則)</span>
-            <span class="plus">+</span>
-        </div>
-        <div class="card-content">
-            <ol>
-                <li><strong>適當性：</strong> 手段必須有助於達成目的 。</li>
-                <li><strong>必要性：</strong> 多種手段中，選擇對人民權利「侵害最小」者 。</li>
-                <li><strong>衡量性：</strong> 損害不得與達成的利益顯失均衡 。</li>
-            </ol>
-        </div>
-    </div>
+    <section id="econ">
+        <h2>【經濟篇】決策與市場</h2>
 
-    <div class="section-title">【經濟篇】生產可能曲線與 GDP </div>
+        <h3>◎ 核心概念：機會成本 </h3>
+        <p><b>公式：</b>機會成本 = <span class="key-point">會計成本 + 隱含成本</span>。</p>
+        <p>當資源有多種用途時，選擇其中一個，放棄的其他用途中「價值最高者」即為機會成本。</p>
 
-    <div class="card" id="e1">
-        <div class="card-header" onclick="toggle('e1')">
-            <span>◎ GDP 與 GNP 的區分</span>
-            <span class="plus">+</span>
-        </div>
-        <div class="card-content">
-            <ul>
-                <li><strong>GDP (國內生產毛額)：</strong> 以<span class="highlight">國境</span>為界。公式：C + I + G + (X - M) 。</li>
-                <li><strong>GNP (國民生產毛額)：</strong> 以<span class="highlight">國籍</span>為界。公式：GDP + 國外要素所得淨額 。</li>
-            </ul>
-        </div>
-    </div>
+        <h3>◎ 國民生產指標</h3>
+        <ul>
+            <li><b>GDP (國內生產毛額)：</b><span class="key-point">國境</span>概念。公式：C + I + G + (X - M)。</li>
+            <li><b>GNP (國民生產毛額)：</b><span class="key-point">國籍</span>概念。</li>
+        </ul>
 
-    <div class="card" id="e2">
-        <div class="card-header" onclick="toggle('e2')">
-            <span>◎ 公共財與私有財 (排他性 vs 共享性)</span>
-            <span class="plus">+</span>
+        <h3>◎ 市場失靈與政府干預</h3>
+        <div class="note">
+            <b>外部成本：</b>行為人將負擔轉嫁給第三人（如污染），導致社會福利損失。<br>
+            <b>政府對策：</b><span class="key-point">課稅</span>、建立財產權 。
         </div>
-        <div class="card-content">
-            <table>
-                <tr><th></th><th>排他性</th><th>無排他性</th></tr>
-                <tr><th>獨享性</th><td>純私有財 (如：手機) </td><td>準私有財 (如：海洋漁產) </td></tr>
-                <tr><th>共享性</th><td>準公共財 (如：捷運) </td><td>純公共財 (如：國防、燈塔) </td></tr>
-            </table>
-        </div>
-    </div>
+    </section>
+</div>
 
+<div class="footer">
+    祝各位同學學測順利！加油！🔥
 </div>
 
 <script>
-    function toggle(id) {
-        const card = document.getElementById(id);
-        const content = card.querySelector('.card-content');
-        
-        if (content.style.display === "block") {
-            content.style.display = "none";
-            card.querySelector('.card-header').classList.remove('active');
-        } else {
-            content.style.display = "block";
-            card.querySelector('.card-header').classList.add('active');
-        }
+    // 點擊隱藏/顯示功能
+    document.querySelectorAll('.key-point').forEach(el => {
+        el.classList.add('hidden');
+        el.addEventListener('click', () => {
+            el.classList.toggle('hidden');
+        });
+    });
+
+    function scrollToId(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleAll() {
+        document.querySelectorAll('.key-point').forEach(el => {
+            el.classList.toggle('hidden');
+        });
     }
 </script>
 
